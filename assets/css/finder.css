@@ -1,0 +1,72 @@
+/* Trésmiðjan Rein: shared tokens and field geometry for the two vendored 21st.dev controls. */
+.finder {
+  --foreground: #0c2a12; --surface-raised: #fffefc; --surface-muted: #f1f3ef;
+  --border: rgb(12 42 18 / .22); --border-subtle: rgb(12 42 18 / .12); --border-strong: #007a00;
+  --text-secondary: #5d6660; --text-muted: #89938b;
+  --accent: #007a00; --accent-strong: #006400; --accent-foreground: #fff; --accent-subtle: #e1eedc;
+  --control-height-md: 3.25rem; --control-height-sm: 2.75rem; --radius-control: 0; --radius-pill: 0;
+  --font-body: 'Rubik', system-ui, sans-serif; --text-sm: 1rem; --text-xs: .75rem; --tracking-body: 0; --leading-body: 1.4;
+  --shadow-resting: none; --shadow-floating: 0 18px 36px -14px rgb(6 18 9 / .3), 0 4px 12px rgb(6 18 9 / .06);
+  --duration-instant: .12s; --duration-fast: .16s; --duration-considered: .48s; --ease-standard: cubic-bezier(.22, 1, .36, 1);
+  --halaska-sans: 'Rubik';
+  min-width: 0;
+}
+.finder_slot { position: relative; min-width: 0; }
+.finder_slot.is-machine { z-index: 3; }
+.finder_slot.is-dates { z-index: 2; }
+.fd-drp { display: block !important; width: 100% !important; }
+.finder_l, .fd-select > label {
+  display: block; margin: 0 0 .4rem; color: #666 !important;
+  font: 400 .75rem/1.4 'Rubik', sans-serif !important; letter-spacing: .02em !important; text-transform: uppercase;
+}
+.fd-select { gap: 0 !important; }
+.fd-select [role="combobox"], .fd-drp > button[aria-haspopup="dialog"] {
+  width: 100%; height: var(--control-height-md); padding: 0 14px; gap: 10px;
+  font: 400 1rem/1.4 'Rubik', sans-serif; letter-spacing: 0; font-variant-numeric: tabular-nums;
+  border-radius: 0; color: var(--foreground); text-align: left;
+}
+.fd-select [role="combobox"] {
+  border: 1px solid var(--border) !important; background: var(--surface-raised) !important;
+  height: var(--control-height-md) !important; padding: 0 14px !important; font: 400 1rem/1.4 'Rubik', sans-serif !important;
+}
+.fd-select [role="combobox"][aria-expanded="true"] { border-color: var(--accent) !important; }
+.fd-select [role="combobox"] svg { width: 16px; height: 16px; }
+.fd-drp > button[aria-haspopup="dialog"] { justify-content: flex-start; border: 1px solid transparent; }
+.fd-drp > button[aria-haspopup="dialog"] > span:nth-child(2) { min-width: 0; overflow: hidden; }
+.fd-drp > button[aria-haspopup="dialog"] > span:nth-child(3) { margin-left: auto; }
+/* The label carries the date context; matching text insets keep the fields quiet and aligned. */
+.fd-drp > button[aria-haspopup="dialog"] > span:first-child { display: none; }
+.fd-select [role="listbox"] {
+  position: relative !important; top: auto !important; margin-top: 6px; padding: 6px !important;
+  border: 1px solid var(--border); box-shadow: var(--shadow-floating) !important;
+  background: var(--surface-raised) !important; max-height: min(320px, 50dvh) !important;
+  overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #799373 var(--surface-muted);
+}
+.fd-select [role="option"] {
+  min-height: 44px; padding: 10px !important; font: 400 15px/1.4 'Rubik', sans-serif !important;
+  font-variant-numeric: tabular-nums; color: var(--foreground) !important; background: transparent !important;
+}
+.fd-select [role="option"][data-active] { background: var(--accent-subtle) !important; color: var(--accent) !important; }
+.fd-select [role="option"][aria-selected="true"] { background: var(--accent) !important; color: white !important; }
+.fd-select [role="option"][aria-selected="true"] > span { color: white !important; }
+.finder [data-island] button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+.finder [data-island] button:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+html[data-input="pointer"] .finder [data-island] button:focus-visible { outline: none; box-shadow: none; }
+@media (hover: hover) and (pointer: fine) {
+  .fd-select [role="combobox"]:hover { border-color: var(--accent) !important; }
+}
+@media (min-width: 992px) { .landing .finder { align-self: start; } }
+@media (max-width: 479px) {
+  .finder_head { flex-direction: column; align-items: flex-start; gap: .4rem; }
+  .finder_hint { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .finder { --halaska-t-fast: 0s; --halaska-t-normal: 0s; --halaska-t-smooth: 0s; }
+  .finder [data-island] *, .finder [data-island] *::before, .finder [data-island] *::after { animation-duration: 0s !important; transition-duration: 0s !important; }
+}
+
+/* Trésmiðjan Rein: the extracted select referenced this animation but did not ship its keyframes. */
+@keyframes halaska-dropdown-expand {
+  from { opacity: 0; transform: translateY(-5px) scaleY(.98); }
+  to { opacity: 1; transform: translateY(0) scaleY(1); }
+}
