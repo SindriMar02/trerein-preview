@@ -300,7 +300,7 @@
   /* ---------- §4.12 featured slider ---------- */
   function slider() {
     const wrap = $('[data-slider]');
-    if (!wrap) return;
+    if (!wrap || wrap.hasAttribute('data-island-slider')) return; // home: 21st.dev Snap Carousel island
     const track = $('[data-slider-track]', wrap);
     const items = $$('.slider_item', track);
     let cur = 0, target = 0, max = 0, sw = 0, ww = 0, lefts = [], visible = false, settled = false;
